@@ -1,23 +1,38 @@
 package com.tp2.stringcalculator;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-class StringCalculatorTest {
+public class StringCalculatorTest {
+    private final StringCalculator calculator = new StringCalculator();
 
-    // TODO: Replace these lines with your tests
     @Test
-    void exampleTest(){
-        assertEquals(4, 2 + 1);
+    void testEmptyString() {
+        assertEquals(0, calculator.add(""));
     }
 
-//    Missing tests:
-//
-//- Empty string should return 0
-//- Single number should return that number
-//- Two numbers separated by comma should return their sum
-//- Multiple numbers separated by comma should return their sum
-//- Numbers separated by newline should work as delimiter
-//- Negative numbers should throw IllegalArgumentException
+    @Test
+    void testSingleNumber() {
+        assertEquals(1, calculator.add("1"));
+    }
+
+    @Test
+    void testTwoNumbers() {
+        assertEquals(3, calculator.add("1,2"));
+    }
+
+    @Test
+    void testMultipleNumbers() {
+        assertEquals(6, calculator.add("1,2,3"));
+    }
+
+    @Test
+    void testNewlineDelimiter() {
+        assertEquals(6, calculator.add("1\n2,3"));
+    }
+
+    @Test
+    void testNegativeNumber() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,-2"));
+    }
 }
